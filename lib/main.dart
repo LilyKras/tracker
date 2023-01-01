@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './widgets/transactionList.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List a = [];
+  String titleInput = '';
+  String amountInput = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,31 +25,50 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
               width: double.infinity,
               child: Card(
                 color: Colors.purple,
-                child: Text("Card",
+                child: Text("Chart",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
                     )),
                 elevation: 5,
               )),
-          Container(
-              width: 100,
-              child: Card(
-                color: Colors.purple,
-                child: Text("List of tx",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                    )),
-                elevation: 5,
-              )),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: "Title"),
+                    onChanged: (val) {
+                      titleInput = val;
+                    },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Amount"),
+                    onChanged: (val) {
+                      amountInput = val;
+                    },
+                  ),
+                  TextButton(
+                    onPressed: () => {},
+                    child: Text(
+                      "Add",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          TransactionList()
         ],
       ),
     );
