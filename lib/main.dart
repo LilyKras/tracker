@@ -81,8 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final appBar = AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Personal Expenses',
@@ -93,13 +92,15 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.add),
           ),
         ],
-      ),
+      );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_resentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container(child: Chart(_resentTransactions), height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.vertical)*0.25,),
+            Container(child: TransactionList(_userTransactions, _deleteTransaction), height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.vertical)*0.75),
           ],
         ),
       ),
